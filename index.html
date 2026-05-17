@@ -701,14 +701,56 @@
       background: transparent; color: var(--text-dark); outline: 1px solid var(--text-dark);
     }
 
-    .products-split {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
-      margin-top: 3rem; align-items: stretch;
+    /* Produtos — catálogo com imagem em vitrine */
+    .products-layout {
+      display: grid; grid-template-columns: 1fr 1.15fr;
+      gap: 5rem; align-items: center; margin-top: 3rem;
     }
-    .products-split-img { overflow: hidden; min-height: 500px; }
-    .products-split-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
-    .products-split-img:hover img { transform: scale(1.03); }
-    .products-split-body { padding: 0 0 0 4rem; display: flex; flex-direction: column; justify-content: center; }
+    .products-body h3 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700; line-height: 1;
+      color: var(--text-dark); margin-bottom: 1.5rem;
+    }
+    .products-body p {
+      font-size: 0.875rem; font-weight: 300;
+      color: var(--text-mid); line-height: 1.85; margin-bottom: 1rem;
+    }
+    .products-tags {
+      display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: 1.75rem;
+    }
+    .ptag {
+      font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+      color: var(--text-dark); border: 1px solid rgba(0,0,0,0.2);
+      padding: 0.4rem 0.85rem;
+      transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
+    }
+    .ptag:hover { background: var(--text-dark); color: var(--white); border-color: var(--text-dark); }
+    .products-note-light {
+      margin-top: 1.5rem; font-size: 0.78rem; font-weight: 300;
+      color: #888; line-height: 1.7;
+    }
+    .btn-border-dark {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Jost', sans-serif; font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; padding: 0.9rem 2rem; margin-top: 1.5rem;
+      background: transparent; color: var(--text-dark);
+      border: 1px solid rgba(0,0,0,0.28);
+      transition: all 0.25s ease;
+    }
+    .btn-border-dark:hover { background: var(--text-dark); color: var(--white); border-color: var(--text-dark); }
+    /* Vitrine da imagem — fundo branco flutuando sobre o off-white */
+    .products-showcase { display: flex; justify-content: center; align-items: center; }
+    .products-img-frame {
+      background: var(--white);
+      box-shadow: 0 6px 48px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05);
+      padding: 2.5rem;
+      width: 100%;
+    }
+    .products-img-frame img {
+      width: 100%; height: auto; display: block; object-fit: contain;
+    }
 
     /* ─── Footer nav simplificado ────────────────── */
     .footer-nav a { font-size: 1.2rem; }
@@ -760,9 +802,8 @@
 
       .products-inner { grid-template-columns: 1fr; gap: 3rem; }
       .products-list { grid-template-columns: 1fr; }
-      .products-split { grid-template-columns: 1fr; }
-      .products-split-img { min-height: 280px; }
-      .products-split-body { padding: 2.5rem 0 0; }
+      .products-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+      .products-img-frame { padding: 1.5rem; }
 
       .why-inner { grid-template-columns: 1fr; gap: 2.5rem; }
 
@@ -1005,12 +1046,10 @@
   <section class="section products section-light" id="produtos" aria-labelledby="produtos-titulo">
     <p class="sec-label reveal">Produtos de Limpeza Automóvel</p>
 
-    <div class="products-split">
-      <div class="products-split-img reveal">
-        <img src="img-3.jpg" alt="Produtos de limpeza para veículos pesados" loading="lazy">
-      </div>
+    <div class="products-layout">
 
-      <div class="products-split-body reveal" style="transition-delay:0.12s;">
+      <!-- Conteúdo -->
+      <div class="products-body reveal">
         <h3 id="produtos-titulo">Limpeza<br>Automóvel</h3>
         <p>
           Disponibilizamos produtos de limpeza e manutenção para veículos pesados e comerciais, selecionados para garantir maior durabilidade, proteção e apresentação da sua frota.
@@ -1019,20 +1058,32 @@
           Trabalhamos com soluções adequadas para utilização profissional e manutenção regular de veículos.
         </p>
 
-        <p class="products-col-label" style="margin-top: 1.5rem;">Produtos Disponíveis</p>
-        <ul class="products-list">
-          <li>Limpeza de interiores</li>
-          <li>Limpeza de exteriores</li>
-          <li>Desengordurantes</li>
-          <li>Produtos para jantes</li>
-          <li>Limpeza de motores</li>
-          <li>Shampoos automóveis</li>
-          <li>Produtos de acabamento</li>
-          <li>Consumíveis de manutenção</li>
-        </ul>
-        <p class="products-note">Entre em contacto connosco para conhecer os produtos disponíveis e preços.</p>
-        <a href="tel:919210032" class="btn btn-white">Pedir Informações</a>
+        <div class="products-tags" aria-label="Produtos disponíveis">
+          <span class="ptag">Limpeza de interiores</span>
+          <span class="ptag">Limpeza de exteriores</span>
+          <span class="ptag">Desengordurantes</span>
+          <span class="ptag">Produtos para jantes</span>
+          <span class="ptag">Limpeza de motores</span>
+          <span class="ptag">Shampoos automóveis</span>
+          <span class="ptag">Produtos de acabamento</span>
+          <span class="ptag">Consumíveis de manutenção</span>
+        </div>
+
+        <p class="products-note-light">Entre em contacto connosco para conhecer os produtos disponíveis e preços.</p>
+        <a href="tel:919210032" class="btn-border-dark">Pedir Informações</a>
       </div>
+
+      <!-- Imagem em vitrine -->
+      <div class="products-showcase reveal" style="transition-delay:0.18s;">
+        <div class="products-img-frame">
+          <img
+            src="products.jpeg"
+            alt="Gama completa de produtos de limpeza automóvel Bass Motor"
+            loading="lazy"
+          >
+        </div>
+      </div>
+
     </div>
   </section>
 
