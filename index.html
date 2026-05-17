@@ -703,8 +703,8 @@
 
     /* Produtos — catálogo com imagem em vitrine */
     .products-layout {
-      display: grid; grid-template-columns: 1fr 1.15fr;
-      gap: 5rem; align-items: center; margin-top: 3rem;
+      display: grid; grid-template-columns: 1fr 1.3fr;
+      gap: 4rem; align-items: center; margin-top: 3rem;
     }
     .products-body h3 {
       font-family: 'Big Shoulders Display', sans-serif;
@@ -740,16 +740,26 @@
       transition: all 0.25s ease;
     }
     .btn-border-dark:hover { background: var(--text-dark); color: var(--white); border-color: var(--text-dark); }
-    /* Vitrine da imagem — fundo branco flutuando sobre o off-white */
-    .products-showcase { display: flex; justify-content: center; align-items: center; }
+    /* Vitrine da imagem — fundo eliminado via mix-blend-mode */
+    .products-showcase {
+      display: flex; justify-content: center; align-items: center;
+      position: relative;
+    }
+    .products-showcase::before {
+      content: '';
+      position: absolute;
+      inset: -3rem -2rem;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.04) 0%, transparent 70%);
+      pointer-events: none;
+    }
     .products-img-frame {
-      background: var(--white);
-      box-shadow: 0 6px 48px rgba(0,0,0,0.07), 0 0 0 1px rgba(0,0,0,0.05);
-      padding: 2.5rem;
       width: 100%;
+      max-width: 520px;
     }
     .products-img-frame img {
-      width: 100%; height: auto; display: block; object-fit: contain;
+      width: 100%; height: auto; display: block;
+      object-fit: contain;
+      mix-blend-mode: multiply;
     }
 
     /* ─── Footer nav simplificado ────────────────── */
