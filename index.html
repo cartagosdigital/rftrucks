@@ -1,0 +1,1224 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>RFTRUCKS — Oficina de Veículos Pesados | Ponte da Barca</title>
+  <meta name="description" content="Oficina especializada em reparação e manutenção de veículos pesados. Mecânica, eletrónica, caixas de velocidades. Vila Nova de Muía, Ponte da Barca. Tel: 919 210 032">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="RFTRUCKS — Oficina de Veículos Pesados">
+  <meta property="og:description" content="Reparação e manutenção de veículos pesados em Ponte da Barca. Rapidez, confiança e profissionalismo.">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_PT">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "RFTRUCKS",
+    "description": "Oficina especializada em reparação e manutenção de veículos pesados",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "CM1343 80",
+      "postalCode": "4980-020",
+      "addressLocality": "Vila Nova de Muía",
+      "addressRegion": "Ponte da Barca",
+      "addressCountry": "PT"
+    },
+    "telephone": "+351919210032",
+    "priceRange": "€€"
+  }
+  </script>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@300;400;700;900&family=Jost:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─── Variables ─────────────────────────────── */
+    :root {
+      --black:      #080808;
+      --black-2:    #111111;
+      --gray-dark:  #141414;
+      --gray-mid:   #1c1c1c;
+      --gray-text:  #7a7a7a;
+      --gray-light: #c8c8c8;
+      --white:      #ffffff;
+      --border:     rgba(255,255,255,0.08);
+      --border-h:   rgba(255,255,255,0.18);
+    }
+
+    /* ─── Reset ─────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--black);
+      color: var(--white);
+      font-family: 'Jost', sans-serif;
+      font-weight: 400;
+      line-height: 1.6;
+      overflow-x: hidden;
+      cursor: none;
+    }
+
+    /* ─── Grain overlay ──────────────────────────── */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      pointer-events: none;
+      opacity: 0.025;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)'/%3E%3C/svg%3E");
+      background-size: 200px 200px;
+    }
+
+    /* ─── Custom cursor ──────────────────────────── */
+    .cur-dot {
+      position: fixed;
+      width: 6px; height: 6px;
+      background: var(--white);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.15s ease, opacity 0.2s ease;
+      mix-blend-mode: difference;
+    }
+    .cur-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(255,255,255,0.4);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: width 0.3s ease, height 0.3s ease, border-color 0.3s ease;
+    }
+    body:has(a:hover) .cur-ring,
+    body:has(button:hover) .cur-ring {
+      width: 56px; height: 56px;
+      border-color: rgba(255,255,255,0.7);
+    }
+
+    /* ─── Navigation ─────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      z-index: 800;
+      padding: 1.75rem 3rem;
+      display: flex; align-items: center; justify-content: space-between;
+      transition: background 0.4s ease, padding 0.4s ease, border-color 0.4s ease;
+      border-bottom: 1px solid transparent;
+    }
+    .nav.is-scrolled {
+      background: rgba(8,8,8,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 1.1rem 3rem;
+      border-color: var(--border);
+    }
+
+    .nav-logo {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-weight: 900;
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
+      color: var(--white);
+      text-decoration: none;
+    }
+    .nav-logo em { color: rgba(255,255,255,0.35); font-style: normal; }
+
+    .nav-links {
+      display: flex; gap: 2.5rem; list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gray-text);
+      text-decoration: none;
+      transition: color 0.2s;
+      position: relative;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute; left: 0; bottom: -4px;
+      width: 0; height: 1px;
+      background: var(--white);
+      transition: width 0.25s ease;
+    }
+    .nav-links a:hover { color: var(--white); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .nav-tel {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 0.95rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--white);
+      text-decoration: none;
+      border: 1px solid var(--border-h);
+      padding: 0.5rem 1.25rem;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-tel:hover { background: var(--white); color: var(--black); }
+
+    /* Hamburger */
+    .hamburger {
+      display: none; flex-direction: column; gap: 5px;
+      padding: 4px; cursor: none;
+    }
+    .hamburger span {
+      display: block; width: 22px; height: 1px;
+      background: var(--white);
+      transition: all 0.3s ease;
+    }
+    .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+    .hamburger.open span:nth-child(2) { opacity: 0; }
+    .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+    /* Mobile overlay */
+    .mobile-menu {
+      display: none; position: fixed; inset: 0;
+      background: var(--black);
+      z-index: 790;
+      flex-direction: column; align-items: flex-start; justify-content: flex-end;
+      padding: 3rem;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(2.2rem, 7vw, 3.5rem);
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--white);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding: 1rem 0;
+      width: 100%;
+      opacity: 0.5;
+      transition: opacity 0.2s;
+    }
+    .mobile-menu a:hover { opacity: 1; }
+    .mobile-tel {
+      margin-top: 2rem;
+      font-family: 'Jost', sans-serif !important;
+      font-size: 0.75rem !important;
+      letter-spacing: 0.15em !important;
+      font-weight: 500 !important;
+      color: var(--gray-text) !important;
+      border-bottom: none !important;
+      opacity: 1 !important;
+    }
+
+    /* ─── HERO ───────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      padding: 0 3rem 5rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Diagonal grid pattern */
+    .hero-grid {
+      position: absolute; inset: 0; z-index: 0; pointer-events: none;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 80px 80px;
+      mask-image: linear-gradient(to bottom, transparent 0%, black 30%, black 70%, transparent 100%);
+    }
+
+    /* Ghost background wordmark */
+    .hero-ghost {
+      position: absolute;
+      right: -0.05em;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(9rem, 28vw, 24rem);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(255,255,255,0.035);
+      white-space: nowrap;
+      user-select: none;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Vertical label */
+    .hero-side-label {
+      position: absolute;
+      left: 3rem;
+      bottom: 5rem;
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+      font-size: 0.6rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--gray-text);
+      z-index: 1;
+    }
+
+    .hero-content { position: relative; z-index: 1; }
+
+    .hero-eyebrow {
+      font-size: 0.65rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gray-text);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.7s ease 0.2s forwards;
+    }
+
+    .hero-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(5rem, 14vw, 12rem);
+      font-weight: 900;
+      line-height: 0.88;
+      letter-spacing: -0.01em;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+    .hero-title-row {
+      display: block;
+      transform: translateY(110%);
+      animation: slideUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+    }
+    .hero-title-row:nth-child(1) { animation-delay: 0.35s; }
+    .hero-title-row:nth-child(2) { animation-delay: 0.52s; }
+
+    .hero-divider {
+      width: 100%;
+      height: 1px;
+      background: var(--border);
+      margin: 1.5rem 0;
+      opacity: 0;
+      animation: fadeIn 0.5s ease 0.9s forwards;
+    }
+
+    .hero-bottom {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .hero-services {
+      display: flex; gap: 1.5rem; align-items: center; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1s forwards;
+    }
+    .hero-services span {
+      font-size: 0.68rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gray-text);
+    }
+    .hero-services .sep {
+      width: 1px; height: 12px; background: var(--border-h);
+    }
+
+    .hero-actions {
+      display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1.15s forwards;
+    }
+
+    .hero-phone-block {
+      position: absolute;
+      right: 3rem; top: 50%;
+      transform: translateY(-50%);
+      display: flex; flex-direction: column; align-items: flex-end; gap: 0.3rem;
+      opacity: 0;
+      animation: fadeUp 0.6s ease 1.4s forwards;
+      z-index: 1;
+    }
+    .hero-phone-label {
+      font-size: 0.6rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gray-text);
+    }
+    .hero-phone-number {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 1.5rem; font-weight: 700; letter-spacing: 0.04em;
+      color: var(--white); text-decoration: none;
+      transition: opacity 0.2s;
+    }
+    .hero-phone-number:hover { opacity: 0.6; }
+
+    /* Scroll indicator */
+    .scroll-cue {
+      position: absolute; bottom: 2.5rem; left: 50%;
+      transform: translateX(-50%);
+      display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+      opacity: 0;
+      animation: fadeIn 0.6s ease 1.8s forwards;
+      z-index: 1;
+    }
+    .scroll-cue span {
+      font-size: 0.55rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gray-text);
+    }
+    .scroll-cue-line {
+      width: 1px; height: 48px;
+      background: linear-gradient(to bottom, var(--gray-text), transparent);
+      animation: scrollBob 2.2s ease-in-out infinite;
+    }
+
+    /* ─── Buttons ────────────────────────────────── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      font-family: 'Jost', sans-serif;
+      font-size: 0.7rem; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase;
+      text-decoration: none; padding: 0.9rem 2rem;
+      transition: all 0.25s ease;
+    }
+    .btn-white { background: var(--white); color: var(--black); }
+    .btn-white:hover { background: transparent; color: var(--white); outline: 1px solid var(--white); }
+    .btn-ghost { background: transparent; color: var(--white); outline: 1px solid var(--border-h); }
+    .btn-ghost:hover { outline-color: var(--white); }
+    .btn-dark { background: var(--black); color: var(--white); }
+    .btn-dark:hover { background: #222; }
+    .btn-outline-black { background: transparent; color: var(--black); outline: 1px solid #000; }
+    .btn-outline-black:hover { background: var(--black); color: var(--white); }
+
+    /* ─── Section base ───────────────────────────── */
+    .section { padding: 7rem 3rem; }
+
+    .sec-label {
+      font-size: 0.6rem; font-weight: 500;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--gray-text);
+      display: flex; align-items: center; gap: 0.75rem;
+      margin-bottom: 1rem;
+    }
+    .sec-label::before {
+      content: ''; display: block;
+      width: 24px; height: 1px; background: var(--gray-text);
+    }
+
+    .sec-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(2.8rem, 5.5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 0.95;
+      letter-spacing: -0.01em;
+    }
+
+    /* ─── ABOUT ──────────────────────────────────── */
+    .about { background: var(--black-2); }
+    .about-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center;
+    }
+
+    .about-left { border-left: 1px solid var(--border); padding-left: 2.5rem; }
+
+    .about-text {
+      font-size: 0.95rem; font-weight: 300;
+      color: var(--gray-light); line-height: 1.85;
+      margin-top: 2rem;
+    }
+    .about-text + .about-text { margin-top: 1rem; }
+
+    .about-quote {
+      margin-top: 2.5rem;
+      padding-top: 2.5rem;
+      border-top: 1px solid var(--border);
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--gray-light);
+      line-height: 1.75;
+    }
+
+    .about-visual {
+      aspect-ratio: 3/4;
+      background: var(--gray-dark);
+      position: relative; overflow: hidden;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .about-visual-grid {
+      position: absolute; inset: 0;
+      background-image:
+        repeating-linear-gradient(-45deg, transparent, transparent 28px, rgba(255,255,255,0.018) 28px, rgba(255,255,255,0.018) 29px);
+    }
+    .about-visual-inner {
+      position: relative; z-index: 1;
+      text-align: center; padding: 2rem;
+    }
+    .about-visual-rf {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(5rem, 12vw, 8rem);
+      font-weight: 900;
+      color: rgba(255,255,255,0.05);
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+    .about-visual-loc {
+      font-size: 0.6rem; letter-spacing: 0.22em;
+      text-transform: uppercase; color: var(--gray-text);
+      margin-top: 1.5rem; line-height: 2;
+    }
+
+    /* ─── SERVICES ───────────────────────────────── */
+    .services { background: var(--gray-dark); }
+
+    .services-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap;
+      padding-bottom: 3rem;
+      border-bottom: 1px solid var(--border);
+      margin-bottom: 0;
+    }
+    .services-sub {
+      max-width: 280px;
+      font-size: 0.85rem; font-weight: 300;
+      color: var(--gray-text); line-height: 1.7;
+    }
+
+    .services-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; background: var(--border);
+      margin-top: 0;
+    }
+
+    .card {
+      background: var(--gray-dark);
+      padding: 3rem 2.75rem;
+      position: relative; overflow: hidden;
+      transition: background 0.35s ease;
+    }
+    .card:hover { background: var(--gray-mid); }
+    .card::before {
+      content: ''; position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px; background: var(--white);
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card:hover::before { transform: scaleX(1); }
+
+    .card-num {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 5.5rem; font-weight: 900;
+      color: rgba(255,255,255,0.04);
+      position: absolute; top: 1rem; right: 1.75rem;
+      line-height: 1; user-select: none;
+    }
+
+    .card-icon {
+      width: 28px; height: 28px; margin-bottom: 1.75rem;
+      stroke: rgba(255,255,255,0.6); stroke-width: 1.5;
+      fill: none;
+    }
+
+    .card-title {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 1.75rem; font-weight: 700;
+      letter-spacing: 0.01em;
+      margin-bottom: 0.75rem;
+    }
+
+    .card-desc {
+      font-size: 0.82rem; font-weight: 300;
+      color: var(--gray-text); line-height: 1.75;
+      margin-bottom: 1.75rem;
+    }
+
+    .card-list {
+      list-style: none; display: flex; flex-direction: column; gap: 0.45rem;
+    }
+    .card-list li {
+      font-size: 0.78rem; font-weight: 400;
+      color: var(--gray-light);
+      display: flex; align-items: center; gap: 0.75rem;
+    }
+    .card-list li::before {
+      content: ''; flex-shrink: 0;
+      width: 14px; height: 1px; background: rgba(255,255,255,0.2);
+    }
+
+    /* Full-width assistance card */
+    .card-full { grid-column: 1 / -1; }
+    .card-full-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem;
+    }
+
+    /* ─── PRODUCTS ───────────────────────────────── */
+    .products { background: var(--black); }
+    .products-inner {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start;
+      margin-top: 3rem;
+    }
+
+    .products-left h3 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700; line-height: 1; margin-bottom: 1.5rem;
+    }
+    .products-left p {
+      font-size: 0.875rem; font-weight: 300;
+      color: var(--gray-light); line-height: 1.85;
+      margin-bottom: 1rem;
+    }
+    .products-left .btn { margin-top: 1.5rem; }
+
+    .products-col-label {
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gray-text); margin-bottom: 1.5rem;
+    }
+    .products-list {
+      list-style: none;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+    }
+    .products-list li {
+      font-size: 0.78rem; font-weight: 400;
+      color: var(--gray-light);
+      display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.65rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .products-list li::before {
+      content: ''; flex-shrink: 0;
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--gray-text);
+    }
+    .products-note {
+      margin-top: 1.75rem;
+      font-size: 0.78rem; font-weight: 300;
+      color: var(--gray-text); line-height: 1.7;
+    }
+
+    /* ─── WHY ────────────────────────────────────── */
+    .why { background: var(--black-2); }
+    .why-header {
+      display: flex; align-items: flex-end; justify-content: space-between;
+      gap: 2rem; flex-wrap: wrap; margin-bottom: 3.5rem;
+    }
+
+    .why-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      border: 1px solid var(--border);
+    }
+    .why-item {
+      padding: 2.25rem 2rem;
+      border-right: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      transition: background 0.25s ease;
+      position: relative; overflow: hidden;
+    }
+    .why-item:hover { background: rgba(255,255,255,0.025); }
+    .why-item:nth-child(3n) { border-right: none; }
+    .why-item:nth-child(4), .why-item:nth-child(5), .why-item:nth-child(6) { border-bottom: none; }
+
+    .why-mark {
+      width: 22px; height: 22px; border: 1px solid var(--border-h);
+      display: grid; place-items: center; margin-bottom: 1rem;
+    }
+    .why-mark::after {
+      content: '✓'; font-size: 0.65rem; color: var(--gray-light);
+    }
+    .why-text {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 1.15rem; font-weight: 700;
+      letter-spacing: 0.01em; line-height: 1.2;
+    }
+
+    /* ─── CTA BAND ───────────────────────────────── */
+    .cta-band {
+      background: var(--white); color: var(--black);
+      padding: 7rem 3rem; text-align: center;
+    }
+    .cta-band h2 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(3rem, 7vw, 6rem);
+      font-weight: 900; line-height: 0.92;
+      letter-spacing: -0.02em;
+      color: var(--black);
+      margin-bottom: 1.5rem;
+    }
+    .cta-band p {
+      font-size: 0.95rem; font-weight: 300;
+      color: #555; max-width: 520px;
+      margin: 0 auto 3rem; line-height: 1.75;
+    }
+    .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+    /* ─── CONTACT / FOOTER ───────────────────────── */
+    .footer { background: var(--black); border-top: 1px solid var(--border); }
+    .footer-top {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; padding: 7rem 3rem 5rem;
+    }
+
+    .footer-left h2 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(3rem, 6vw, 5rem);
+      font-weight: 900; line-height: 0.92; margin-bottom: 3rem;
+    }
+
+    .contact-row {
+      display: flex; align-items: flex-start; gap: 1rem; margin-bottom: 1.75rem;
+    }
+    .contact-row-icon { font-size: 1rem; flex-shrink: 0; margin-top: 0.1rem; }
+    .contact-row-body strong {
+      display: block; font-size: 0.58rem;
+      letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--gray-text); font-weight: 500; margin-bottom: 0.3rem;
+    }
+    .contact-row-body a, .contact-row-body p {
+      font-size: 0.95rem; color: var(--white); text-decoration: none;
+      font-weight: 400; transition: opacity 0.2s;
+    }
+    .contact-row-body a:hover { opacity: 0.55; }
+
+    .footer-actions { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2.5rem; }
+
+    .footer-right h3 {
+      font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--gray-text); margin-bottom: 1rem;
+    }
+    .footer-nav { list-style: none; }
+    .footer-nav li { border-bottom: 1px solid var(--border); }
+    .footer-nav a {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 0;
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: 1.7rem; font-weight: 700;
+      color: var(--white); text-decoration: none;
+      letter-spacing: 0.01em;
+      transition: color 0.2s ease, padding-left 0.2s ease;
+    }
+    .footer-nav a:hover { color: var(--gray-text); padding-left: 0.5rem; }
+    .footer-nav a::after {
+      content: '↗'; font-family: sans-serif;
+      font-size: 0.9rem; font-weight: 400;
+      opacity: 0.3; transition: opacity 0.2s;
+    }
+    .footer-nav a:hover::after { opacity: 0.7; }
+
+    .footer-bottom {
+      padding: 2rem 3rem;
+      border-top: 1px solid var(--border);
+      display: flex; align-items: center; justify-content: space-between;
+      flex-wrap: wrap; gap: 1rem;
+    }
+    .footer-bottom p {
+      font-size: 0.65rem; letter-spacing: 0.06em;
+      color: var(--gray-text);
+    }
+
+    /* ─── Reveal ─────────────────────────────────── */
+    .reveal {
+      opacity: 0; transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.on { opacity: 1; transform: translateY(0); }
+
+    /* ─── Keyframes ──────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes slideUp {
+      from { transform: translateY(110%); }
+      to   { transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+    @keyframes scrollBob {
+      0%, 100% { transform: scaleY(1); opacity: 1; }
+      50%       { transform: scaleY(0.6); opacity: 0.4; }
+    }
+
+    /* ─── Responsive ─────────────────────────────── */
+    @media (max-width: 960px) {
+      .nav-links, .nav-tel { display: none; }
+      .hamburger { display: flex; }
+
+      .hero { padding: 0 1.5rem 4rem; }
+      .hero-side-label { display: none; }
+      .hero-phone-block { right: 1.5rem; top: auto; bottom: 9rem; transform: none; }
+
+      .section { padding: 5rem 1.5rem; }
+
+      .about-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .about-visual { aspect-ratio: 16/9; }
+
+      .services-grid { grid-template-columns: 1fr; }
+      .card-full { grid-column: 1; }
+      .card-full-inner { grid-template-columns: 1fr; gap: 2rem; }
+      .services-header { flex-direction: column; align-items: flex-start; }
+
+      .products-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .products-list { grid-template-columns: 1fr; }
+
+      .why-grid { grid-template-columns: 1fr 1fr; }
+      .why-item:nth-child(3n) { border-right: 1px solid var(--border); }
+      .why-item:nth-child(2n) { border-right: none; }
+      .why-item:nth-child(4) { border-bottom: 1px solid var(--border); }
+      .why-item:nth-child(5), .why-item:nth-child(6) { border-bottom: none; }
+
+      .footer-top { grid-template-columns: 1fr; gap: 4rem; padding: 5rem 1.5rem 4rem; }
+      .footer-bottom { padding: 1.5rem; }
+      .nav { padding: 1.25rem 1.5rem; }
+      .nav.is-scrolled { padding: 0.9rem 1.5rem; }
+    }
+
+    @media (max-width: 500px) {
+      .why-grid { grid-template-columns: 1fr; }
+      .why-item { border-right: none !important; }
+      .why-item:nth-child(4) { border-bottom: 1px solid var(--border) !important; }
+      .why-item:nth-child(5) { border-bottom: 1px solid var(--border) !important; }
+      .cta-band { padding: 5rem 1.5rem; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Custom cursor -->
+  <div class="cur-dot" id="curDot"></div>
+  <div class="cur-ring" id="curRing"></div>
+
+  <!-- Mobile menu overlay -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#inicio" onclick="closeMenu()">Início</a>
+    <a href="#sobre" onclick="closeMenu()">Sobre Nós</a>
+    <a href="#servicos" onclick="closeMenu()">Serviços</a>
+    <a href="#produtos" onclick="closeMenu()">Produtos</a>
+    <a href="#assistencia" onclick="closeMenu()">Assistência</a>
+    <a href="#contactos" onclick="closeMenu()">Contactos</a>
+    <a href="tel:919210032" class="mobile-tel">919 210 032</a>
+  </div>
+
+  <!-- ═══════════════════════════ NAV ══════════════════════════════ -->
+  <header class="nav" id="mainNav" role="banner">
+    <a href="#inicio" class="nav-logo" aria-label="RFTRUCKS — Página inicial">
+      RF<em>TRUCKS</em>
+    </a>
+
+    <nav aria-label="Navegação principal">
+      <ul class="nav-links">
+        <li><a href="#sobre">Sobre Nós</a></li>
+        <li><a href="#servicos">Serviços</a></li>
+        <li><a href="#produtos">Produtos</a></li>
+        <li><a href="#assistencia">Assistência</a></li>
+        <li><a href="#contactos">Contactos</a></li>
+      </ul>
+    </nav>
+
+    <a href="tel:919210032" class="nav-tel" aria-label="Ligar para 919 210 032">
+      919 210 032
+    </a>
+
+    <button
+      class="hamburger"
+      id="hamburger"
+      aria-label="Abrir menu"
+      aria-expanded="false"
+      onclick="toggleMenu()"
+    >
+      <span></span><span></span><span></span>
+    </button>
+  </header>
+
+  <!-- ═══════════════════════════ HERO ═════════════════════════════ -->
+  <section class="hero" id="inicio" aria-label="Início">
+    <div class="hero-grid" aria-hidden="true"></div>
+    <div class="hero-ghost" aria-hidden="true">RFTRUCKS</div>
+    <span class="hero-side-label" aria-hidden="true">Vila Nova de Muía · Ponte da Barca</span>
+
+    <div class="hero-content">
+      <p class="hero-eyebrow">Oficina Especializada em Veículos Pesados</p>
+
+      <h1 class="hero-title" aria-label="RFTRUCKS">
+        <span class="hero-title-row">RF</span>
+        <span class="hero-title-row">TRUCKS</span>
+      </h1>
+
+      <div class="hero-divider" aria-hidden="true"></div>
+
+      <div class="hero-bottom">
+        <div class="hero-services" aria-label="Especialidades">
+          <span>Mecânica</span>
+          <div class="sep" aria-hidden="true"></div>
+          <span>Eletrónica</span>
+          <div class="sep" aria-hidden="true"></div>
+          <span>Caixas de Velocidades</span>
+          <div class="sep" aria-hidden="true"></div>
+          <span>Assistência Técnica</span>
+        </div>
+
+        <div class="hero-actions">
+          <a href="#contactos" class="btn btn-white">Pedir Orçamento</a>
+          <a href="tel:919210032" class="btn btn-ghost">
+            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12.5 19.79 19.79 0 0 1 1.61 3.87 2 2 0 0 1 3.58 1.67h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 9.91a16 16 0 0 0 6.18 6.18l1.42-1.42a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+            Ligar Agora
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-phone-block" aria-label="Contacto telefónico">
+      <span class="hero-phone-label">Linha Direta</span>
+      <a href="tel:919210032" class="hero-phone-number">919 210 032</a>
+    </div>
+
+    <div class="scroll-cue" aria-hidden="true">
+      <div class="scroll-cue-line"></div>
+      <span>Descer</span>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ SOBRE ════════════════════════════ -->
+  <section class="section about" id="sobre" aria-labelledby="sobre-titulo">
+    <div class="about-inner">
+      <div class="about-left reveal">
+        <p class="sec-label">Sobre Nós</p>
+        <h2 class="sec-title" id="sobre-titulo">
+          Especialistas<br>em Pesados
+        </h2>
+        <p class="about-text">
+          A RFTRUCKS é uma oficina especializada na reparação e manutenção de veículos pesados, localizada em Vila Nova de Muía, Ponte da Barca.
+        </p>
+        <p class="about-text">
+          Trabalhamos diariamente para garantir soluções rápidas, fiáveis e adaptadas às necessidades de motoristas, empresas de transporte e gestores de frota.
+        </p>
+        <blockquote class="about-quote">
+          Com experiência no setor e uma equipa técnica especializada, asseguramos um serviço rigoroso, diagnóstico preciso e acompanhamento profissional.
+        </blockquote>
+      </div>
+
+      <div class="reveal" style="transition-delay:0.12s;">
+        <div class="about-visual" aria-hidden="true">
+          <div class="about-visual-grid"></div>
+          <div class="about-visual-inner">
+            <div class="about-visual-rf">RF</div>
+            <p class="about-visual-loc">
+              Vila Nova de Muía<br>Ponte da Barca · Portugal
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ SERVIÇOS ═════════════════════════ -->
+  <section class="section services" id="servicos" aria-labelledby="servicos-titulo" style="padding-bottom: 0;">
+    <div class="services-header reveal">
+      <div>
+        <p class="sec-label">Os Nossos Serviços</p>
+        <h2 class="sec-title" id="servicos-titulo">O Que Fazemos</h2>
+      </div>
+      <p class="services-sub">
+        Serviços completos de reparação e manutenção para todo o tipo de veículos pesados.
+      </p>
+    </div>
+
+    <div class="services-grid" role="list">
+
+      <!-- 01 Mecânica -->
+      <article class="card reveal" role="listitem" style="transition-delay:0.05s;">
+        <span class="card-num" aria-hidden="true">01</span>
+        <svg class="card-icon" viewBox="0 0 28 28" aria-hidden="true">
+          <circle cx="14" cy="14" r="3.5"/>
+          <path d="M14 2v3M14 23v3M2 14h3M23 14h3M5.5 5.5l2.1 2.1M20.4 20.4l2.1 2.1M5.5 22.5l2.1-2.1M20.4 7.6l2.1-2.1"/>
+        </svg>
+        <h3 class="card-title">Mecânica Geral</h3>
+        <p class="card-desc">Serviços completos de manutenção e reparação mecânica para veículos pesados.</p>
+        <ul class="card-list">
+          <li>Revisões periódicas</li>
+          <li>Reparação de motores</li>
+          <li>Sistemas de travagem</li>
+          <li>Suspensão e direção</li>
+          <li>Sistemas pneumáticos</li>
+          <li>Embraiagens</li>
+          <li>Manutenção preventiva</li>
+        </ul>
+      </article>
+
+      <!-- 02 Eletrónica -->
+      <article class="card reveal" role="listitem" style="transition-delay:0.1s;">
+        <span class="card-num" aria-hidden="true">02</span>
+        <svg class="card-icon" viewBox="0 0 28 28" aria-hidden="true">
+          <rect x="3" y="7" width="22" height="14" rx="1"/>
+          <path d="M9 12h2M15 12h2M9 16h10M19 12h1"/>
+          <path d="M10 7V5M18 7V5"/>
+        </svg>
+        <h3 class="card-title">Diagnóstico Eletrónico</h3>
+        <p class="card-desc">Equipamentos avançados para deteção rápida e precisa de avarias eletrónicas.</p>
+        <ul class="card-list">
+          <li>Diagnóstico computorizado</li>
+          <li>Sistemas ABS / EBS</li>
+          <li>Sensores e módulos eletrónicos</li>
+          <li>Reparação elétrica</li>
+          <li>Programação e parametrização</li>
+          <li>Eletrónica de veículos pesados</li>
+        </ul>
+      </article>
+
+      <!-- 03 Caixas -->
+      <article class="card reveal" role="listitem" style="transition-delay:0.15s;">
+        <span class="card-num" aria-hidden="true">03</span>
+        <svg class="card-icon" viewBox="0 0 28 28" aria-hidden="true">
+          <circle cx="7" cy="11" r="2.5"/>
+          <circle cx="21" cy="11" r="2.5"/>
+          <circle cx="14" cy="21" r="2.5"/>
+          <path d="M9.5 11h9M7 13.5v4a2.5 2.5 0 0 0 2.5 2.5h1M21 13.5v4a2.5 2.5 0 0 1-2.5 2.5h-1"/>
+        </svg>
+        <h3 class="card-title">Caixas de Velocidades</h3>
+        <p class="card-desc">Especialização na reparação e manutenção de sistemas de transmissão.</p>
+        <ul class="card-list">
+          <li>Caixas manuais e automáticas</li>
+          <li>Reparação de transmissões</li>
+          <li>Diferenciais</li>
+          <li>Sistemas de embraiagem</li>
+          <li>Reconstrução de componentes</li>
+          <li>Diagnóstico de falhas de transmissão</li>
+        </ul>
+      </article>
+
+      <!-- 04 Assistência — full width -->
+      <article class="card card-full reveal" role="listitem" id="assistencia" style="transition-delay:0.2s;">
+        <span class="card-num" aria-hidden="true" style="font-size:7rem;">04</span>
+        <div class="card-full-inner">
+          <div>
+            <svg class="card-icon" viewBox="0 0 28 28" aria-hidden="true">
+              <path d="M14 3l1.8 5.4h5.7L17 12.1l1.8 5.4L14 14.8l-4.8 2.7 1.8-5.4L6.5 8.4h5.7z"/>
+              <path d="M3.5 24c0-5.5 4.7-9.5 10.5-9.5S24.5 18.5 24.5 24"/>
+            </svg>
+            <h3 class="card-title">Assistência Técnica</h3>
+            <p class="card-desc">
+              Apoio técnico eficiente para reduzir tempos de imobilização e garantir maior continuidade operacional da sua frota.
+            </p>
+          </div>
+          <ul class="card-list">
+            <li>Assistência técnica especializada</li>
+            <li>Manutenção preventiva</li>
+            <li>Verificação geral de sistemas</li>
+            <li>Apoio a frotas</li>
+            <li>Diagnóstico rápido</li>
+          </ul>
+        </div>
+      </article>
+
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PRODUTOS ═════════════════════════ -->
+  <section class="section products" id="produtos" aria-labelledby="produtos-titulo">
+    <p class="sec-label reveal">Produtos de Limpeza</p>
+
+    <div class="products-inner">
+      <div class="products-left reveal">
+        <h3 id="produtos-titulo">
+          Limpeza<br>Automóvel
+        </h3>
+        <p>
+          Disponibilizamos produtos de limpeza e manutenção para veículos pesados e comerciais, selecionados para garantir maior durabilidade, proteção e apresentação da sua frota.
+        </p>
+        <p>
+          Trabalhamos com soluções adequadas para utilização profissional e manutenção regular de veículos.
+        </p>
+        <a href="tel:919210032" class="btn btn-white">Pedir Informações</a>
+      </div>
+
+      <div class="reveal" style="transition-delay:0.12s;">
+        <p class="products-col-label">Produtos Disponíveis</p>
+        <ul class="products-list">
+          <li>Limpeza de interiores</li>
+          <li>Limpeza de exteriores</li>
+          <li>Desengordurantes</li>
+          <li>Produtos para jantes</li>
+          <li>Limpeza de motores</li>
+          <li>Shampoos automóveis</li>
+          <li>Produtos de acabamento</li>
+          <li>Consumíveis de manutenção</li>
+        </ul>
+        <p class="products-note">
+          Entre em contacto connosco para conhecer os produtos disponíveis e preços.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ PORQUÊ ═══════════════════════════ -->
+  <section class="section why" aria-labelledby="why-titulo">
+    <div class="why-header">
+      <div class="reveal">
+        <p class="sec-label">Porquê a RFTRUCKS</p>
+        <h2 class="sec-title" id="why-titulo">Porque Nos Escolher</h2>
+      </div>
+    </div>
+
+    <div class="why-grid" role="list">
+      <div class="why-item reveal" role="listitem">
+        <div class="why-mark" aria-hidden="true"></div>
+        <p class="why-text">Equipa técnica especializada</p>
+      </div>
+      <div class="why-item reveal" role="listitem" style="transition-delay:0.06s;">
+        <div class="why-mark" aria-hidden="true"></div>
+        <p class="why-text">Atendimento profissional e transparente</p>
+      </div>
+      <div class="why-item reveal" role="listitem" style="transition-delay:0.12s;">
+        <div class="why-mark" aria-hidden="true"></div>
+        <p class="why-text">Diagnóstico rápido e preciso</p>
+      </div>
+      <div class="why-item reveal" role="listitem" style="transition-delay:0.18s;">
+        <div class="why-mark" aria-hidden="true"></div>
+        <p class="why-text">Soluções adaptadas a veículos pesados</p>
+      </div>
+      <div class="why-item reveal" role="listitem" style="transition-delay:0.24s;">
+        <div class="why-mark" aria-hidden="true"></div>
+        <p class="why-text">Compromisso com qualidade e confiança</p>
+      </div>
+      <div class="why-item reveal" role="listitem" style="transition-delay:0.3s;">
+        <div class="why-mark" aria-hidden="true"></div>
+        <p class="why-text">Foco na redução do tempo de paragem</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════ CTA BAND ═════════════════════════ -->
+  <div class="cta-band reveal">
+    <h2>Mantemos o Seu<br>Negócio em Movimento</h2>
+    <p>
+      Sabemos que cada hora parada representa custos para o seu negócio. Na RFTRUCKS damos prioridade a um serviço eficiente, rigoroso e preparado para responder às exigências do setor dos transportes.
+    </p>
+    <div class="cta-actions">
+      <a href="#contactos" class="btn btn-dark">Falar Connosco</a>
+      <a href="tel:919210032" class="btn btn-outline-black">Marcar Assistência</a>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════ FOOTER ═══════════════════════════ -->
+  <footer class="footer" id="contactos" aria-label="Contactos e rodapé">
+    <div class="footer-top">
+
+      <div class="footer-left reveal">
+        <h2>Entre em<br>Contacto</h2>
+
+        <address style="font-style:normal;">
+          <div class="contact-row">
+            <span class="contact-row-icon" aria-hidden="true">📍</span>
+            <div class="contact-row-body">
+              <strong>Morada</strong>
+              <p>CM1343 80, 4980-020<br>Vila Nova de Muía, Ponte da Barca</p>
+            </div>
+          </div>
+
+          <div class="contact-row">
+            <span class="contact-row-icon" aria-hidden="true">📞</span>
+            <div class="contact-row-body">
+              <strong>Telefone</strong>
+              <a href="tel:919210032">919 210 032</a>
+            </div>
+          </div>
+        </address>
+
+        <p style="font-size:0.82rem; font-weight:300; color:var(--gray-text); line-height:1.75; margin-top:0.5rem;">
+          Entre em contacto connosco para agendar manutenção, diagnóstico ou reparação do seu veículo pesado.
+        </p>
+
+        <div class="footer-actions">
+          <a href="tel:919210032" class="btn btn-white">Falar Connosco</a>
+          <a href="tel:919210032" class="btn btn-ghost">Marcar Assistência</a>
+        </div>
+      </div>
+
+      <div class="footer-right reveal" style="transition-delay:0.12s;">
+        <h3>Navegação</h3>
+        <nav aria-label="Navegação do rodapé">
+          <ul class="footer-nav">
+            <li><a href="#inicio">Início</a></li>
+            <li><a href="#sobre">Sobre Nós</a></li>
+            <li><a href="#servicos">Serviços</a></li>
+            <li><a href="#produtos">Produtos de Limpeza</a></li>
+            <li><a href="#assistencia">Assistência Técnica</a></li>
+            <li><a href="#contactos">Contactos</a></li>
+          </ul>
+        </nav>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p>© 2025 RFTRUCKS — Vila Nova de Muía, Ponte da Barca</p>
+      <p>Oficina Especializada em Veículos Pesados</p>
+    </div>
+  </footer>
+
+  <script>
+    /* ── Custom cursor ──────────────────────────── */
+    const dot  = document.getElementById('curDot');
+    const ring = document.getElementById('curRing');
+    let mx = 0, my = 0, rx = 0, ry = 0;
+
+    document.addEventListener('mousemove', e => {
+      mx = e.clientX; my = e.clientY;
+      dot.style.left = mx + 'px';
+      dot.style.top  = my + 'px';
+    });
+
+    (function followRing() {
+      rx += (mx - rx) * 0.10;
+      ry += (my - ry) * 0.10;
+      ring.style.left = rx + 'px';
+      ring.style.top  = ry + 'px';
+      requestAnimationFrame(followRing);
+    })();
+
+    /* ── Nav scroll state ───────────────────────── */
+    const nav = document.getElementById('mainNav');
+    const onScroll = () => nav.classList.toggle('is-scrolled', window.scrollY > 60);
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    /* ── Mobile menu ────────────────────────────── */
+    const burger = document.getElementById('hamburger');
+    const menu   = document.getElementById('mobileMenu');
+
+    function toggleMenu() {
+      const open = menu.classList.toggle('open');
+      burger.classList.toggle('open', open);
+      burger.setAttribute('aria-expanded', open);
+      document.body.style.overflow = open ? 'hidden' : '';
+    }
+    function closeMenu() {
+      menu.classList.remove('open');
+      burger.classList.remove('open');
+      burger.setAttribute('aria-expanded', 'false');
+      document.body.style.overflow = '';
+    }
+
+    /* ── Scroll reveal ──────────────────────────── */
+    const observer = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('on'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Smooth anchor scroll ───────────────────── */
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (!target) return;
+        e.preventDefault();
+        closeMenu();
+        target.scrollIntoView({ behavior: 'smooth' });
+      });
+    });
+  </script>
+</body>
+</html>
