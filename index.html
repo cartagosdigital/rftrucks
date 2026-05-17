@@ -37,15 +37,19 @@
   <style>
     /* ─── Variables ─────────────────────────────── */
     :root {
-      --black:      #080808;
-      --black-2:    #111111;
-      --gray-dark:  #141414;
-      --gray-mid:   #1c1c1c;
-      --gray-text:  #7a7a7a;
-      --gray-light: #c8c8c8;
-      --white:      #ffffff;
-      --border:     rgba(255,255,255,0.08);
-      --border-h:   rgba(255,255,255,0.18);
+      --black:        #080808;
+      --black-2:      #111111;
+      --gray-dark:    #141414;
+      --gray-mid:     #1c1c1c;
+      --gray-text:    #7a7a7a;
+      --gray-light:   #c8c8c8;
+      --white:        #ffffff;
+      --border:       rgba(255,255,255,0.08);
+      --border-h:     rgba(255,255,255,0.18);
+      --off-white:    #f3f1ec;
+      --text-dark:    #1c1c1c;
+      --text-mid:     #555555;
+      --border-light: rgba(0,0,0,0.1);
     }
 
     /* ─── Reset ─────────────────────────────────── */
@@ -644,6 +648,73 @@
       color: var(--gray-text);
     }
 
+    /* ─── Secções claras ─────────────────────────── */
+    .section-light { background: var(--off-white); }
+    .section-light .sec-label { color: #888; }
+    .section-light .sec-label::before { background: #888; }
+    .section-light .sec-title { color: var(--text-dark); }
+
+    /* About claro */
+    .section-light .about-left { border-left-color: var(--border-light); }
+    .section-light .about-text { color: var(--text-mid); }
+    .section-light .about-quote { color: var(--text-mid); border-top-color: var(--border-light); }
+
+    /* Remover números fantasma dos cards */
+    .card-num { display: none; }
+
+    /* ─── WHY — redesenhado ──────────────────────── */
+    .why { background: var(--gray-dark); }
+    .why-inner {
+      display: grid; grid-template-columns: 1fr 1.6fr; gap: 6rem; align-items: start;
+    }
+    .why-head { padding-top: 0.5rem; }
+    .why-rows { border-top: 1px solid var(--border); }
+    .why-row {
+      display: flex; align-items: center; gap: 1.25rem;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem; font-weight: 400; color: var(--gray-light);
+      transition: color 0.2s ease, padding-left 0.2s ease;
+    }
+    .why-row:hover { color: var(--white); padding-left: 0.25rem; }
+    .why-row::before {
+      content: ''; flex-shrink: 0;
+      width: 18px; height: 1px; background: var(--gray-text);
+    }
+
+    /* ─── PRODUTOS — split com imagem ───────────── */
+    .products.section-light .products-col-label { color: #888; }
+    .products.section-light h3 {
+      font-family: 'Big Shoulders Display', sans-serif;
+      font-size: clamp(2.2rem, 4vw, 3.2rem);
+      font-weight: 700; line-height: 1;
+      color: var(--text-dark); margin-bottom: 1.5rem;
+    }
+    .products.section-light p { color: var(--text-mid); font-size: 0.875rem; font-weight: 300; line-height: 1.85; margin-bottom: 1rem; }
+    .products.section-light .products-list li { color: #444; border-bottom-color: rgba(0,0,0,0.08); }
+    .products.section-light .products-list li::before { background: #aaa; }
+    .products.section-light .products-note { color: #888; }
+    .products.section-light .btn-white {
+      background: var(--text-dark); color: var(--white); margin-top: 1.5rem;
+    }
+    .products.section-light .btn-white:hover {
+      background: transparent; color: var(--text-dark); outline: 1px solid var(--text-dark);
+    }
+
+    .products-split {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+      margin-top: 3rem; align-items: stretch;
+    }
+    .products-split-img { overflow: hidden; min-height: 500px; }
+    .products-split-img img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s ease; }
+    .products-split-img:hover img { transform: scale(1.03); }
+    .products-split-body { padding: 0 0 0 4rem; display: flex; flex-direction: column; justify-content: center; }
+
+    /* ─── Footer nav simplificado ────────────────── */
+    .footer-nav a { font-size: 1.2rem; }
+    .footer-nav a::after { display: none; }
+    .footer-nav a:hover { padding-left: 0.3rem; }
+
     /* ─── Reveal ─────────────────────────────────── */
     .reveal {
       opacity: 0; transform: translateY(28px);
@@ -689,12 +760,11 @@
 
       .products-inner { grid-template-columns: 1fr; gap: 3rem; }
       .products-list { grid-template-columns: 1fr; }
+      .products-split { grid-template-columns: 1fr; }
+      .products-split-img { min-height: 280px; }
+      .products-split-body { padding: 2.5rem 0 0; }
 
-      .why-grid { grid-template-columns: 1fr 1fr; }
-      .why-item:nth-child(3n) { border-right: 1px solid var(--border); }
-      .why-item:nth-child(2n) { border-right: none; }
-      .why-item:nth-child(4) { border-bottom: 1px solid var(--border); }
-      .why-item:nth-child(5), .why-item:nth-child(6) { border-bottom: none; }
+      .why-inner { grid-template-columns: 1fr; gap: 2.5rem; }
 
       .footer-top { grid-template-columns: 1fr; gap: 4rem; padding: 5rem 1.5rem 4rem; }
       .footer-bottom { padding: 1.5rem; }
@@ -703,10 +773,6 @@
     }
 
     @media (max-width: 500px) {
-      .why-grid { grid-template-columns: 1fr; }
-      .why-item { border-right: none !important; }
-      .why-item:nth-child(4) { border-bottom: 1px solid var(--border) !important; }
-      .why-item:nth-child(5) { border-bottom: 1px solid var(--border) !important; }
       .cta-band { padding: 5rem 1.5rem; }
     }
   </style>
@@ -806,7 +872,7 @@
   </section>
 
   <!-- ═══════════════════════════ SOBRE ════════════════════════════ -->
-  <section class="section about" id="sobre" aria-labelledby="sobre-titulo">
+  <section class="section about section-light" id="sobre" aria-labelledby="sobre-titulo">
     <div class="about-inner">
       <div class="about-left reveal">
         <p class="sec-label">Sobre Nós</p>
@@ -853,7 +919,6 @@
 
       <!-- 01 Mecânica -->
       <article class="card reveal" role="listitem" style="transition-delay:0.05s;">
-        <span class="card-num" aria-hidden="true">01</span>
         <svg class="card-icon" viewBox="0 0 28 28" aria-hidden="true">
           <circle cx="14" cy="14" r="3.5"/>
           <path d="M14 2v3M14 23v3M2 14h3M23 14h3M5.5 5.5l2.1 2.1M20.4 20.4l2.1 2.1M5.5 22.5l2.1-2.1M20.4 7.6l2.1-2.1"/>
@@ -873,7 +938,6 @@
 
       <!-- 02 Eletrónica -->
       <article class="card reveal" role="listitem" style="transition-delay:0.1s;">
-        <span class="card-num" aria-hidden="true">02</span>
         <svg class="card-icon" viewBox="0 0 28 28" aria-hidden="true">
           <rect x="3" y="7" width="22" height="14" rx="1"/>
           <path d="M9 12h2M15 12h2M9 16h10M19 12h1"/>
@@ -893,7 +957,6 @@
 
       <!-- 03 Caixas -->
       <article class="card reveal" role="listitem" style="transition-delay:0.15s;">
-        <span class="card-num" aria-hidden="true">03</span>
         <svg class="card-icon" viewBox="0 0 28 28" aria-hidden="true">
           <circle cx="7" cy="11" r="2.5"/>
           <circle cx="21" cy="11" r="2.5"/>
@@ -914,7 +977,6 @@
 
       <!-- 04 Assistência — full width -->
       <article class="card card-full reveal" role="listitem" id="assistencia" style="transition-delay:0.2s;">
-        <span class="card-num" aria-hidden="true" style="font-size:7rem;">04</span>
         <div class="card-full-inner">
           <div>
             <svg class="card-icon" viewBox="0 0 28 28" aria-hidden="true">
@@ -940,25 +1002,24 @@
   </section>
 
   <!-- ═══════════════════════════ PRODUTOS ═════════════════════════ -->
-  <section class="section products" id="produtos" aria-labelledby="produtos-titulo">
-    <p class="sec-label reveal">Produtos de Limpeza</p>
+  <section class="section products section-light" id="produtos" aria-labelledby="produtos-titulo">
+    <p class="sec-label reveal">Produtos de Limpeza Automóvel</p>
 
-    <div class="products-inner">
-      <div class="products-left reveal">
-        <h3 id="produtos-titulo">
-          Limpeza<br>Automóvel
-        </h3>
+    <div class="products-split">
+      <div class="products-split-img reveal">
+        <img src="img-3.jpg" alt="Produtos de limpeza para veículos pesados" loading="lazy">
+      </div>
+
+      <div class="products-split-body reveal" style="transition-delay:0.12s;">
+        <h3 id="produtos-titulo">Limpeza<br>Automóvel</h3>
         <p>
           Disponibilizamos produtos de limpeza e manutenção para veículos pesados e comerciais, selecionados para garantir maior durabilidade, proteção e apresentação da sua frota.
         </p>
         <p>
           Trabalhamos com soluções adequadas para utilização profissional e manutenção regular de veículos.
         </p>
-        <a href="tel:919210032" class="btn btn-white">Pedir Informações</a>
-      </div>
 
-      <div class="reveal" style="transition-delay:0.12s;">
-        <p class="products-col-label">Produtos Disponíveis</p>
+        <p class="products-col-label" style="margin-top: 1.5rem;">Produtos Disponíveis</p>
         <ul class="products-list">
           <li>Limpeza de interiores</li>
           <li>Limpeza de exteriores</li>
@@ -969,46 +1030,27 @@
           <li>Produtos de acabamento</li>
           <li>Consumíveis de manutenção</li>
         </ul>
-        <p class="products-note">
-          Entre em contacto connosco para conhecer os produtos disponíveis e preços.
-        </p>
+        <p class="products-note">Entre em contacto connosco para conhecer os produtos disponíveis e preços.</p>
+        <a href="tel:919210032" class="btn btn-white">Pedir Informações</a>
       </div>
     </div>
   </section>
 
   <!-- ═══════════════════════════ PORQUÊ ═══════════════════════════ -->
   <section class="section why" aria-labelledby="why-titulo">
-    <div class="why-header">
-      <div class="reveal">
+    <div class="why-inner">
+      <div class="why-head reveal">
         <p class="sec-label">Porquê a RFTRUCKS</p>
-        <h2 class="sec-title" id="why-titulo">Porque Nos Escolher</h2>
+        <h2 class="sec-title" id="why-titulo">Porque<br>Nos Escolher</h2>
       </div>
-    </div>
 
-    <div class="why-grid" role="list">
-      <div class="why-item reveal" role="listitem">
-        <div class="why-mark" aria-hidden="true"></div>
-        <p class="why-text">Equipa técnica especializada</p>
-      </div>
-      <div class="why-item reveal" role="listitem" style="transition-delay:0.06s;">
-        <div class="why-mark" aria-hidden="true"></div>
-        <p class="why-text">Atendimento profissional e transparente</p>
-      </div>
-      <div class="why-item reveal" role="listitem" style="transition-delay:0.12s;">
-        <div class="why-mark" aria-hidden="true"></div>
-        <p class="why-text">Diagnóstico rápido e preciso</p>
-      </div>
-      <div class="why-item reveal" role="listitem" style="transition-delay:0.18s;">
-        <div class="why-mark" aria-hidden="true"></div>
-        <p class="why-text">Soluções adaptadas a veículos pesados</p>
-      </div>
-      <div class="why-item reveal" role="listitem" style="transition-delay:0.24s;">
-        <div class="why-mark" aria-hidden="true"></div>
-        <p class="why-text">Compromisso com qualidade e confiança</p>
-      </div>
-      <div class="why-item reveal" role="listitem" style="transition-delay:0.3s;">
-        <div class="why-mark" aria-hidden="true"></div>
-        <p class="why-text">Foco na redução do tempo de paragem</p>
+      <div class="why-rows" role="list">
+        <div class="why-row reveal" role="listitem">Equipa técnica especializada</div>
+        <div class="why-row reveal" role="listitem" style="transition-delay:0.05s;">Atendimento profissional e transparente</div>
+        <div class="why-row reveal" role="listitem" style="transition-delay:0.1s;">Diagnóstico rápido e preciso</div>
+        <div class="why-row reveal" role="listitem" style="transition-delay:0.15s;">Soluções adaptadas a veículos pesados</div>
+        <div class="why-row reveal" role="listitem" style="transition-delay:0.2s;">Compromisso com qualidade e confiança</div>
+        <div class="why-row reveal" role="listitem" style="transition-delay:0.25s;">Foco na redução do tempo de paragem</div>
       </div>
     </div>
   </section>
