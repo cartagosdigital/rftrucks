@@ -740,30 +740,26 @@
       transition: all 0.25s ease;
     }
     .btn-border-dark:hover { background: var(--text-dark); color: var(--white); border-color: var(--text-dark); }
-    /* ─── Products CTA band ─────────────────────── */
-    .products-cta { padding: 4rem 3rem; }
-    .products-cta-layout {
-      display: flex; align-items: center; justify-content: space-between;
-      gap: 3rem;
+    /* Vitrine da imagem — fundo eliminado via mix-blend-mode */
+    .products-showcase {
+      display: flex; justify-content: center; align-items: center;
+      position: relative;
     }
-    .products-cta-text { flex: 1; }
-    .products-cta-text h3 {
-      font-family: 'Big Shoulders Display', sans-serif;
-      font-size: clamp(1.6rem, 3vw, 2.4rem);
-      font-weight: 700; line-height: 1.05;
-      color: var(--text-dark); margin: 0 0 0.75rem;
+    .products-showcase::before {
+      content: '';
+      position: absolute;
+      inset: -3rem -2rem;
+      background: radial-gradient(ellipse at center, rgba(0,0,0,0.04) 0%, transparent 70%);
+      pointer-events: none;
     }
-    .products-cta-text p {
-      font-size: 0.875rem; font-weight: 300;
-      color: var(--text-mid); line-height: 1.7;
-      margin-bottom: 1.5rem; max-width: 38ch;
+    .products-img-frame {
+      width: 100%;
+      max-width: 520px;
     }
-    .products-cta-img {
-      flex: 0 0 220px; width: 220px;
-    }
-    .products-cta-img img {
+    .products-img-frame img {
       width: 100%; height: auto; display: block;
-      object-fit: contain; mix-blend-mode: multiply;
+      object-fit: contain;
+      mix-blend-mode: multiply;
     }
 
     /* ─── Footer nav simplificado ────────────────── */
@@ -814,9 +810,9 @@
       .card-full-inner { grid-template-columns: 1fr; gap: 2rem; }
       .services-header { flex-direction: column; align-items: flex-start; }
 
-      .products-cta { padding: 3rem 1.5rem; }
-      .products-cta-layout { flex-direction: column; gap: 2rem; }
-      .products-cta-img { flex: 0 0 160px; width: 160px; align-self: flex-start; }
+      .products-inner { grid-template-columns: 1fr; gap: 3rem; }
+      .products-list { grid-template-columns: 1fr; }
+      .products-layout { grid-template-columns: 1fr; gap: 2.5rem; }
       .products-img-frame { padding: 1.5rem; }
 
       .why-inner { grid-template-columns: 1fr; gap: 2.5rem; }
@@ -1053,22 +1049,45 @@
   </section>
 
   <!-- ═══════════════════════════ PRODUTOS ═════════════════════════ -->
-  <section class="section products-cta section-light" id="produtos" aria-labelledby="produtos-titulo">
-    <div class="products-cta-layout">
+  <section class="section products section-light" id="produtos" aria-labelledby="produtos-titulo">
+    <p class="sec-label reveal">Produtos de Limpeza Automóvel</p>
 
-      <div class="products-cta-text reveal">
-        <p class="sec-label" style="margin-bottom:0.75rem;">Produtos</p>
-        <h3 id="produtos-titulo">Produtos de Limpeza Automóvel</h3>
-        <p>Gama selecionada de produtos profissionais para limpeza e manutenção da sua frota.</p>
+    <div class="products-layout">
+
+      <!-- Conteúdo -->
+      <div class="products-body reveal">
+        <h3 id="produtos-titulo">Limpeza<br>Automóvel</h3>
+        <p>
+          Disponibilizamos produtos de limpeza e manutenção para veículos pesados e comerciais, selecionados para garantir maior durabilidade, proteção e apresentação da sua frota.
+        </p>
+        <p>
+          Trabalhamos com soluções adequadas para utilização profissional e manutenção regular de veículos.
+        </p>
+
+        <div class="products-tags" aria-label="Produtos disponíveis">
+          <span class="ptag">Limpeza de interiores</span>
+          <span class="ptag">Limpeza de exteriores</span>
+          <span class="ptag">Desengordurantes</span>
+          <span class="ptag">Produtos para jantes</span>
+          <span class="ptag">Limpeza de motores</span>
+          <span class="ptag">Shampoos automóveis</span>
+          <span class="ptag">Produtos de acabamento</span>
+          <span class="ptag">Consumíveis de manutenção</span>
+        </div>
+
+        <p class="products-note-light">Entre em contacto connosco para conhecer os produtos disponíveis e preços.</p>
         <a href="tel:919210032" class="btn-border-dark">Pedir Informações</a>
       </div>
 
-      <div class="products-cta-img reveal" style="transition-delay:0.15s;">
-        <img
-          src="products.webp"
-          alt="Produtos de limpeza automóvel"
-          loading="lazy"
-        >
+      <!-- Imagem em vitrine -->
+      <div class="products-showcase reveal" style="transition-delay:0.18s;">
+        <div class="products-img-frame">
+          <img
+            src="products.webp"
+            alt="Gama completa de produtos de limpeza automóvel Bass Motor"
+            loading="lazy"
+          >
+        </div>
       </div>
 
     </div>
