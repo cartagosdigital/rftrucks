@@ -1385,3 +1385,185 @@ body::after {
   .woo-products-grid { grid-template-columns: 1fr; }
   .woo-related-grid { grid-template-columns: 1fr 1fr; }
 }
+
+
+/* ═══════════════════════════════════════════════
+   FIX: Remove white containers GeneratePress/WooCommerce
+   ═══════════════════════════════════════════════ */
+
+/* Body base */
+body.woocommerce,
+body.woocommerce-page {
+  background: var(--black) !important;
+}
+
+/* GeneratePress injeta estes wrappers via woocommerce_before_main_content */
+body.woocommerce     #page,
+body.woocommerce-page #page,
+body.woocommerce     #content,
+body.woocommerce-page #content,
+body.woocommerce     .site-content,
+body.woocommerce-page .site-content,
+body.woocommerce     #primary,
+body.woocommerce-page #primary,
+body.woocommerce     .content-area,
+body.woocommerce-page .content-area,
+body.woocommerce     .site-main,
+body.woocommerce-page .site-main,
+body.woocommerce     .inside-article,
+body.woocommerce-page .inside-article,
+body.woocommerce     .entry,
+body.woocommerce-page .entry,
+body.woocommerce     .entry-content,
+body.woocommerce-page .entry-content,
+body.woocommerce     .hentry,
+body.woocommerce-page .hentry,
+/* WooCommerce próprio */
+.woocommerce,
+.woocommerce-page .woocommerce,
+.woocommerce-notices-wrapper {
+  background:       transparent !important;
+  background-color: transparent !important;
+  border:    none !important;
+  box-shadow: none !important;
+  padding:   0    !important;
+  margin:    0    !important;
+  max-width: none !important;
+  width:     auto !important;
+  color: var(--white) !important;
+}
+
+/* WooCommerce ul.products (lista padrão — não usada, mas pode ser gerada) */
+.woocommerce ul.products,
+.woocommerce-page ul.products,
+.woocommerce ul.products li.product,
+.woocommerce-page ul.products li.product {
+  background:       transparent !important;
+  background-color: transparent !important;
+  border:    none !important;
+  box-shadow: none !important;
+  padding:   0    !important;
+  margin:    0    !important;
+}
+
+/* ─── Breadcrumb gerado pelo WooCommerce ─────── */
+.woocommerce-breadcrumb,
+nav.woocommerce-breadcrumb {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  gap: 0.6rem !important;
+  background: transparent !important;
+  padding: 0 3rem 1.75rem !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.15em !important;
+  text-transform: uppercase !important;
+  color: var(--gray-text) !important;
+  border: none !important;
+}
+.woocommerce-breadcrumb a,
+nav.woocommerce-breadcrumb a {
+  color: var(--gray-text) !important;
+  text-decoration: none !important;
+  transition: color 0.2s !important;
+}
+.woocommerce-breadcrumb a:hover,
+nav.woocommerce-breadcrumb a:hover {
+  color: var(--white) !important;
+}
+
+/* ─── "Showing X results" e "Default sorting" ── */
+.woocommerce-result-count {
+  font-family: 'Jost', sans-serif !important;
+  font-size: 0.65rem !important;
+  letter-spacing: 0.2em !important;
+  text-transform: uppercase !important;
+  color: var(--gray-text) !important;
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 0 2.5rem !important;
+  display: block !important;
+}
+
+.woocommerce-ordering {
+  margin: 0 0 2.5rem !important;
+  background: transparent !important;
+}
+.woocommerce-ordering select,
+.woocommerce-ordering .orderby {
+  background:    var(--gray-dark) !important;
+  color:         var(--white)     !important;
+  border:        1px solid var(--border-h) !important;
+  padding:       0.5rem 2.5rem 0.5rem 1rem !important;
+  font-family:   'Jost', sans-serif !important;
+  font-size:     0.75rem !important;
+  letter-spacing: 0.08em !important;
+  cursor: pointer !important;
+  appearance:         none !important;
+  -webkit-appearance: none !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23aaaaaa' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") !important;
+  background-repeat: no-repeat !important;
+  background-position: right 0.9rem center !important;
+}
+
+/* ─── Product grid — bordas e hover ─────────── */
+.woo-products-grid {
+  border: 1px solid var(--border) !important;
+}
+.woo-product-card {
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/* Fix para links dentro dos cards (GeneratePress pode sobrescrever) */
+.woo-product-title a,
+.woo-product-card a {
+  color: var(--white) !important;
+  text-decoration: none !important;
+}
+.woo-product-card .woo-add-to-cart,
+.woo-product-card .button,
+.woo-product-card .added_to_cart {
+  color: var(--white) !important;
+  background: transparent !important;
+  border: 1px solid var(--border-h) !important;
+  font-family: 'Jost', sans-serif !important;
+  font-size: 0.65rem !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.14em !important;
+  text-transform: uppercase !important;
+  text-decoration: none !important;
+  padding: 0.75rem 1.4rem !important;
+  transition: all 0.25s ease !important;
+  display: inline-flex !important;
+  align-items: center !important;
+}
+.woo-product-card .woo-add-to-cart:hover,
+.woo-product-card .button:hover,
+.woo-product-card .added_to_cart:hover {
+  background: var(--white)  !important;
+  color:      var(--black)  !important;
+  border-color: var(--white) !important;
+}
+
+/* Fix preço (woocommerce insere <span class="woocommerce-Price-amount">) */
+.woocommerce-Price-amount,
+.woo-product-price .amount,
+.woo-single-price .amount {
+  font-family: 'Big Shoulders Display', sans-serif !important;
+  color: var(--white) !important;
+}
+.woo-product-price del .amount,
+.woo-single-price del .amount {
+  color: var(--gray-text) !important;
+  font-size: 0.9rem !important;
+}
+
+/* ─── Responsive breadcrumb ─────────────────── */
+@media (max-width: 960px) {
+  .woocommerce-breadcrumb,
+  nav.woocommerce-breadcrumb {
+    padding: 0 1.5rem 1.5rem !important;
+  }
+}
