@@ -24,6 +24,37 @@ get_header();
 
   <?php if ( woocommerce_product_loop() ) : ?>
 
+    <?php
+    // Filtro de categorias
+    $shop_cats = get_terms( [
+        'taxonomy'   => 'product_cat',
+        'hide_empty' => true,
+        'exclude'    => [ get_option( 'default_product_cat' ) ],
+        'orderby'    => 'name',
+        'order'      => 'ASC',
+    ] );
+
+    $current_cat = is_product_category() ? get_queried_object() : null;
+
+    if ( ! empty( $shop_cats ) && ! is_wp_error( $shop_cats ) ) :
+    ?>
+    <nav class="woo-cat-filter" aria-label="Filtrar por categoria">
+      <span class="woo-cat-filter-label">Categoria</span>
+
+      <a
+        href="<?php echo esc_url( wc_get_page_permalink( 'shop' ) ); ?>"
+        class="woo-cat-pill<?php echo ! $current_cat ? ' active' : ''; ?>"
+      >Todos</a>
+
+      <?php foreach ( $shop_cats as $cat ) : ?>
+        <a
+          href="<?php echo esc_url( get_term_link( $cat ) ); ?>"
+          class="woo-cat-pill<?php echo ( $current_cat && $current_cat->term_id === $cat->term_id ) ? ' active' : ''; ?>"
+        ><?php echo esc_html( $cat->name ); ?></a>
+      <?php endforeach; ?>
+    </nav>
+    <?php endif; ?>
+
     <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:1rem; margin-bottom:2.5rem;">
       <?php woocommerce_result_count(); ?>
       <?php woocommerce_catalog_ordering(); ?>
