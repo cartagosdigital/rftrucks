@@ -1567,3 +1567,78 @@ nav.woocommerce-breadcrumb a:hover {
     padding: 0 1.5rem 1.5rem !important;
   }
 }
+
+
+/* ═══════════════════════════════════════════════
+   FIX: Área de produtos — fundo claro, largura total, cards escuros
+   ═══════════════════════════════════════════════ */
+
+/* Fundo claro, largura total, sem constrangimentos */
+.woo-archive-wrap {
+  background: var(--off-white) !important;
+  width: 100% !important;
+  max-width: none !important;
+  padding: 4rem 3rem 7rem !important;
+}
+
+/* Breadcrumb adapta-se ao fundo claro */
+.woo-archive-wrap .woocommerce-breadcrumb,
+.woo-archive-wrap nav.woocommerce-breadcrumb {
+  color: #888 !important;
+  padding: 0 0 2rem !important;
+}
+.woo-archive-wrap .woocommerce-breadcrumb a,
+.woo-archive-wrap nav.woocommerce-breadcrumb a {
+  color: #888 !important;
+}
+.woo-archive-wrap .woocommerce-breadcrumb a:hover,
+.woo-archive-wrap nav.woocommerce-breadcrumb a:hover {
+  color: var(--text-dark) !important;
+}
+
+/* "Showing X results" sobre fundo claro */
+.woo-archive-wrap .woocommerce-result-count {
+  color: #888 !important;
+}
+
+/* Select "Default sorting" sobre fundo claro */
+.woo-archive-wrap .woocommerce-ordering select,
+.woo-archive-wrap .woocommerce-ordering .orderby {
+  background: var(--white) !important;
+  color: var(--text-dark) !important;
+  border-color: rgba(0,0,0,0.18) !important;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23555555' stroke-width='1.5' fill='none'/%3E%3C/svg%3E") !important;
+}
+
+/* Grid: gap entre cards em fundo claro */
+.woo-archive-wrap .woo-products-grid {
+  background: rgba(0,0,0,0.08) !important;
+  border-color: rgba(0,0,0,0.08) !important;
+}
+
+/* Cards mantêm fundo escuro — destaque sobre o off-white */
+.woo-archive-wrap .woo-product-card {
+  background: var(--gray-dark) !important;
+}
+.woo-archive-wrap .woo-product-card:hover {
+  background: var(--gray-mid) !important;
+}
+
+/* Paginação sobre fundo claro */
+.woo-archive-wrap .woo-pagination a,
+.woo-archive-wrap .woo-pagination span {
+  border-color: rgba(0,0,0,0.15) !important;
+  color: var(--text-mid) !important;
+  background: transparent !important;
+}
+.woo-archive-wrap .woo-pagination a:hover,
+.woo-archive-wrap .woo-pagination .current {
+  background: var(--text-dark) !important;
+  color: var(--white) !important;
+  border-color: var(--text-dark) !important;
+}
+
+/* Responsive */
+@media (max-width: 960px) {
+  .woo-archive-wrap { padding: 3rem 1.5rem 5rem !important; }
+}
